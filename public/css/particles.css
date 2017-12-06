@@ -1,0 +1,12 @@
+#particles-js canvas {
+    width: auto;
+    height: auto;
+    background: #EEEEEE;
+    position: absolute;
+    z-index: -1;
+}
+
+#particles-js {
+    width: auto;
+    height: auto;
+}

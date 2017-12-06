@@ -1,0 +1,71 @@
+body {
+  background-color: #eee !important;
+}
+
+.iot-box {
+  background: #fff;
+  width: 300px;
+  height: 300px;
+  position: fixed;
+  bottom: -265px;
+  right: 30px;
+  transition: all .3s;
+  overflow: hidden;
+  z-index:1000000;
+  opacity: 0.85;
+}
+
+.iot-body {
+  /*text-align: center;*/
+  text-decoration: none;
+  display: block;
+  height: 100%;
+  padding: 5px 5px 15px;
+}
+
+/*.iot-button {
+  background: #4d90fe;
+  border: 0;
+  margin: 0 auto;
+  padding: 5px 18px;
+  font-size: 18px;
+  font-weight: 700;
+  color: #fff;
+  text-align: center;
+  display: inline-block;
+  transition: all .3s;
+  text-decoration: none;
+}
+
+.iot-button:hover {
+  background: #365899;
+  }*/
+
+  .iot-header {
+    /*margin: 0 auto;*/
+    background-color: #37474F;
+    padding: 0 10px;
+    height: 35px;
+    line-height: 35px;
+    font-size: 18px;
+    font-weight: 700;
+    color: #eee;
+    display: block;
+    cursor: pointer;
+  }
+
+  .iot-body p {
+    color: #616161;
+    font-size: 16px;
+    margin: 10px;
+  }
+
+  #devices > div > img,span {
+    vertical-align: middle;
+    padding-bottom: 3px;
+  }
+
+  #close_btn {
+    float: right;
+    padding-top: 10px;
+  }

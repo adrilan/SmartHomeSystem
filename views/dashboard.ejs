@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Arduino Smart Home</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="css/font-awesome.min.css">
+  <link rel="stylesheet" type="text/css" href="css/mystyle.css">
+  <link rel="stylesheet" type="text/css" href="css/colpick.css">
+  <link rel="stylesheet" type="text/css" href="css/particles.css">
+  <link rel="stylesheet" type="text/css" href="css/iot-box.css">
+  <link href="https://fonts.googleapis.com/css?family=Titillium+Web" rel="stylesheet">
+</head>
+<body>
+  <div id="particles-js"></div>
+  <div id="navbar-placeholder" style="z-index: 10">
+    <nav class="navbar navbar-inverse navbar-fixed-top" style="height: 46px;">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+
+          <a href="#" class="navbar-brand">
+            <i class="fa fa-home" aria-hidden="true" id="home"></i> IoT Home
+          </a>
+        </div>
+
+        <div class="collapse navbar-collapse" id="navbar-collapse">
+          <ul class="nav navbar-nav" style="margin-top: 1.5px">
+            <li><a href="/">HOME</a></li>
+            <li><a href="/dashboard">DASHBOARD</a></li>
+            <li><a href="/video">VIDEO STREAMING</a></li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <li>
+              <a href="/profile" class="user">
+                <img src="https://<%= user.facebook.picture %>" class="img-circle" width="27"> <%= user.facebook.name %>
+              </a>
+            </li>
+            <li>
+              <a href="/logout">
+                <span>SIGN OUT</span>
+                <i class="fa fa-sign-out" aria-hidden="true"></i>
+              </a>
+            </li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+              </a>
+
+              <!-- <ul class="dropdown-menu">
+                <li><a href="#">About</a></li>
+                <li><a href="#">FAQ</a></li>
+                <li><a href="#">Report or suggest</a></li>
+              </ul> -->
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </div>
+
+  
+
+    <!-- Light Switch -->
+    <div class="col-md-4" style="opacity: 0.85;">
+      <div class="panel panel-primary">
+        <div class="panel-heading">
+          <h3 class="panel-title">
+            <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+            <span>Light Switch</span>
+          </h3>
+        </div>
+
+        <div class="panel-body">
+          <select class="form-control" id="light">
+            <option value="mood">Mood Light</option>
+            <option value="bulb">Light Bulb</option>
+          </select>
+
+          <div id="mood-light">
+            <legend>Control Mood Light</legend>
+            <i class="fa fa-home house" aria-hidden="true" id="picker"></i>
+
+            <div class="text-center">
+              <button type="submit" class="btn btn-primary" id="save-btn" data-loading-text="Loading...">
+                <span class="glyphicon glyphicon-ok" aria-hidden="true"></span> <span data-i18n="save">Save</span>
+              </button>
+
+              <button type="button" class="btn btn-danger" id="clear-btn">
+                <span class="glyphicon glyphicon-remove" aria-hidden="true"></span> <span data-i18n="clear">Clear</span>
+              </button> 
+
+              <a href="http://www.w3schools.com/css/" target="_blank" class="btn btn-info">
+                <span class="glyphicon glyphicon-info-sign"></span> 
+                <span data-i18n="help">Help</span>
+              </a>
+            </div>
+          </div> <!-- Mood light -->
+
+          <div id="light-bulb">
+            <legend>Control Light Bulb</legend>
+            <i class="fa fa-lightbulb-o" aria-hidden="true" id="led"></i>
+          </div>
+        </div>
+        <div class="panel-footer text-center">
+          Copyright &copy; <a href="#">IOT & Robotics Team</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Door Lock -->
+    <div class="col-md-4" style="opacity: 0.85;">
+      <div class="panel panel-primary">
+        <div class="panel-heading">
+          <h3 class="panel-title">
+            <span class="glyphicon glyphicon-flash" aria-hidden="true"></span>
+            <span>Door Lock</span>
+          </h3>
+        </div>
+        <table class="table table-bordered table-striped table-hover">
+          <tbody>
+            <tr>
+              <td>Kitchen</td>
+              <td>
+                <label class="switch">
+                  <input type="checkbox" checked id="switch1" onchange="doorLock()">
+                  <span class="slider round"></span>
+                </label>
+              </td>
+            </tr>
+            <tr>
+              <td>Living Room</td>
+              <td>
+                <label class="switch">
+                  <input type="checkbox" checked id="switch2" onchange="doorLock()">
+                  <span class="slider round"></span>
+                </label>
+              </td>
+            </tr>
+            <tr>
+              <td>Bedroom</td>
+              <td>
+                <label class="switch">
+                  <input type="checkbox" checked id="switch3" onchange="doorLock()">
+                  <span class="slider round"></span>
+                </label>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Temperature -->
+      <div class="panel panel-info">
+        <div class="panel-heading">
+          <h3 class="panel-title">
+            <span class="glyphicon glyphicon-flash" aria-hidden="true"></span>
+            <span>Ambient Status</span>
+          </h3>
+        </div>
+        <div class="panel-footer">
+          <div id="ChartContainer" style="height: 200px; width:100%;"></div>
+        </div>
+      </div>
+    </div>
+    </div>
+
+    <div class="col-md-4" style="opacity: 0.85;">
+      <div class="panel panel-info">
+        <div class="panel-heading">
+          <h3 class="panel-title">
+            <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+            <span>Weather Indication</span>
+          </h3>
+        </div>
+        <input id="pac-input" class="controls" type="text" placeholder="Search Box">
+        <div id="map"></div>
+      </div>
+  </div>
+
+  <div class="col-md-4" style="opacity: 0.85;">
+      <div class="panel panel-primary">
+        <div class="panel-heading">
+          <h3 class="panel-title">
+            <span class="glyphicon glyphicon-flash" aria-hidden="true"></span>
+            <span>Secondary Light Switch</span>
+          </h3>
+        </div>
+        <table class="table table-bordered table-striped table-hover">
+          <tbody>
+            <tr>
+              <td>Kitchen</td>
+              <td>
+                <label class="switch">
+                  <input type="checkbox" checked id="switch1" onchange="doorLock()">
+                  <span class="slider round"></span>
+                </label>
+              </td>
+            </tr>
+            <tr>
+              <td>Living Room</td>
+              <td>
+                <label class="switch">
+                  <input type="checkbox" checked id="switch2" onchange="doorLock()">
+                  <span class="slider round"></span>
+                </label>
+              </td>
+            </tr>
+            <tr>
+              <td>Bedroom</td>
+              <td>
+                <label class="switch">
+                  <input type="checkbox" checked id="switch3" onchange="doorLock()">
+                  <span class="slider round"></span>
+                </label>
+              </td>
+            </tr>
+
+            <tr>
+              <td>Bedroom 2</td>
+              <td>
+                <label class="switch">
+                  <input type="checkbox" checked id="switch3" onchange="doorLock()">
+                  <span class="slider round"></span>
+                </label>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+
+  <div class="iot-box" id="chat">
+    <div class="iot-header" onclick='showHideChat()'>
+      <span>IoT Devices</span>  
+      <span class="glyphicon glyphicon-ok" id="close_btn"></span>
+    </div>
+    <div class="iot-body">
+      <div id="devices">
+        <div>
+          <img src="img/esp8266.png" width="50" height="auto">
+          <span>ESP8266</span><br>
+        </div>
+        <div>
+          <img src="img/ESP32.png" width="50" height="auto">
+          <span>ESP32 - 1</span><br>
+        </div>
+        <div>
+          <img src="img/ESP32.png" width="50" height="auto">
+          <span>ESP32 - 2</span><br>
+        </div>
+        <div>
+          <img src="img/ESP32.png" width="50" height="auto">
+          <span>ESP32 - 3</span><br>
+        </div>
+        <div>
+          <img src="img/ESP32.png" width="50" height="auto">
+          <span>ESP32 - 4</span><br>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script type="text/javascript">
+    
+  </script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
+<script src="/socket.io/socket.io.js"></script>
+<script src="js/colpick.js"></script>
+<script src="js/map.js"></script>
+<script src="js/client.js"></script>
+<script src="js/particles.js"></script>
+<script src="js/app.js"></script>
+<script src="js/iot-box.js"></script>
+<script type="text/javascript" src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+<script src="js/chart.js"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCUWfzuimCMDx6q8UMZrNryioqezYTUqG4&libraries=places&callback=initAutocomplete"
+async defer></script>
+</body>
+</html>
